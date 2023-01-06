@@ -1,0 +1,24 @@
+.card {
+    background-color: #fff;
+    border: 2px solid #000;
+    border-radius: 5px;
+    width: 320px;
+    height: fit-content;
+    padding-bottom: 10px;
+    list-style-type: none;
+    margin-bottom: 10px;
+    &__count,&__name {
+        color: #363333;
+        font-size: 21px;
+        text-align: center;
+        margin-top: 10px;
+    }
+    &__wrapper {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        padding: 0 20px;
+    }
+}

@@ -1,5 +1,6 @@
 .form {
     grid-column: 1;
+    width: 100%;
     &__form {
         display: flex;
         align-items: center;
@@ -10,17 +11,7 @@
             margin: 20px; 
             margin-top: 0; 
         }    
-        &-submit,&-film,&-name {
-            background-color: #363333;
-            width: 310px;
-            font-size: 20px;
-            border-radius: 5px;
-            border: 2px solid #000;
-            transition: 0.3s all;
-            &:hover {
-                border-color: #fff;
-            }
-        }
+        
         &-submit {
             margin-top: 40px;
         }

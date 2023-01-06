@@ -111,9 +111,24 @@ class Add {
     });
   }
 
+  removeElem(item, selector) {
+    const btnClose = item.querySelector(selector);
+    btnClose.addEventListener('click', () => {
+      item.classList.remove('animate__fadeInDown');
+      item.style.cssText = `
+            margin-top: 0px;
+            max-height: 0px;
+            overflow: hidden;
+            `;
+      setTimeout(function () {
+        item.remove();
+      }, 700);
+    });
+  }
+
   createElem() {
     const item = document.createElement('li');
-    item.classList.add('films__list-item');
+    item.classList.add('films__list-item', 'animate__animated', 'animate__fadeInDown');
     item.innerHTML = `
             <div class="films__list-item_name">${this.name.value}</div>
             <div class="films__list-item_author">${this.author.value}</div>
@@ -121,6 +136,7 @@ class Add {
                 <i class="fa-solid fa-trash"></i>
             </div>
         `;
+    this.removeElem(item, '.films__list-item_delete i');
     this.container.appendChild(item);
   }
 
@@ -146,10 +162,77 @@ class Add {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _add__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./add */ "./src/js/add.js");
+/* harmony import */ var _start__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./start */ "./src/js/start.js");
+
 
 window.addEventListener('DOMContentLoaded', () => {
   new _add__WEBPACK_IMPORTED_MODULE_0__["default"]('.form__form-film', '.form__form-name', '.form__form', '.films__list', 'input').init();
+  new _start__WEBPACK_IMPORTED_MODULE_1__["default"]('.start__form', '.films__list', '.start__form-check', '.films').init();
 });
+
+/***/ }),
+
+/***/ "./src/js/start.js":
+/*!*************************!*\
+  !*** ./src/js/start.js ***!
+  \*************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Start; });
+class Start {
+  constructor(form, films, checkbox, container) {
+    this.form = document.querySelector(form);
+    this.films = document.querySelector(films);
+    this.checkbox = document.querySelector(checkbox);
+    this.container = document.querySelector(container);
+  }
+
+  filmList() {
+    this.array = [];
+    this.films.childNodes.forEach(film => {
+      this.array.push(film.querySelector('.films__list-item_name').textContent);
+    });
+  }
+
+  createList() {
+    this.filmList();
+    this.container.childNodes.forEach(child => {
+      child.classList.add('animate__animated', 'animate__fadeOut');
+    });
+    setTimeout(() => {
+      this.container.innerHTML = '';
+      this.cardList = document.createElement('ul');
+      this.cardList.classList.add('card__wrapper');
+      this.container.appendChild(this.cardList);
+    }, 1000);
+  }
+
+  createCard() {
+    this.createList();
+    setTimeout(() => {
+      this.array.forEach(elem => {
+        const card = document.createElement('li');
+        card.classList.add('card', 'animate__animated', 'animate__fadeIn');
+        card.innerHTML = `
+                <div class = "card__name">${elem}</div>
+                <div class = "card__count">100</div>
+                `;
+        this.cardList.appendChild(card);
+      });
+    }, 1000);
+  }
+
+  init() {
+    this.form.addEventListener('submit', e => {
+      e.preventDefault();
+      this.createCard();
+    });
+  }
+
+}
 
 /***/ })
 

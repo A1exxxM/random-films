@@ -1,4 +1,28 @@
 .start {
     grid-row: 2;
     grid-column: 1;
+    &__form {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 300px;
+        flex-direction: column;
+        &-check {
+            transform: scale(1.7);
+        }
+        &-label {
+            font-size: 20px;
+            margin-bottom: 0;
+            cursor: pointer;
+        }
+        &-wrapper {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 0 20px;
+            
+        }
+    }
 }
